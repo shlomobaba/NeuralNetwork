@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from keras.api.datasets import mnist
 import pandas as pd
-import cv2 as cv
 
 
 class NeuralNetwork:
@@ -53,12 +52,21 @@ def main():
     print('X_test:  ' + str(test_x.shape))
     print('Y_test:  ' + str(test_y.shape))
 
+    plt.figure(figsize=(10, 5))
+    for i in range(4):
+        plt.subplot(1, 4, i + 1)
+        plt.imshow(train_x[i], cmap='gray')
+        plt.title(f"Label: {train_y[i]}")
+        plt.axis('off')
+    plt.tight_layout()
+    plt.show()
+
     network = NeuralNetwork([
         Layer(10, 784, Layer.ReLU),
         Layer(10, 10, Layer.softmax),
     ])
-    # print(network.calculate_network_output())
-    # network.calculate_network_output()
+    print(test_x[0].shape)
+    #print(network.calculate_network_output(test_x[0]))
 
 
 if __name__ == '__main__':
